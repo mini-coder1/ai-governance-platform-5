@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Governance Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>AI Governance Platform</h1>
+        <p>Analyze datasets. Identify data-quality issues. Build responsible AI.</p>
+    </header>
+
+    <main>
+        <section class="card">
+            <h2>Dataset Analyzer</h2>
+            <p>Upload a CSV file to examine its structure and data quality.</p>
+
+            <form id="upload-form">
+                <label for="csv-file">Choose your CSV dataset</label>
+                <input
+                    type="file"
+                    id="csv-file"
+                    accept=".csv,text/csv"
+                    required
+                >
+
+                <button type="submit" id="analyze-button">
+                    Analyze Dataset
+                </button>
+            </form>
+
+            <p id="status" role="status" aria-live="polite"></p>
+        </section>
+
+        
+<section class="card">
+    <h2>Model Evaluation</h2>
+    <p>
+        Upload a CSV containing actual and predicted labels
+        to evaluate classification performance.
+    </p>
+
+    <form id="evaluation-form">
+        <label for="evaluation-file">Choose evaluation CSV</label>
+        <input
+            type="file"
+            id="evaluation-file"
+            accept=".csv,text/csv"
+            required
+        >
+
+        <button type="submit" id="evaluate-button">
+            Evaluate Model
+        </button>
+    </form>
+
+    <p id="evaluation-status" role="status" aria-live="polite"></p>
+
+    <div id="evaluation-results" hidden>
+        <h3>Evaluation Results</h3>
+        <div id="evaluation-metrics" class="summary-grid"></div>
+
+        <h3>Confusion Matrix</h3>
+        <div id="confusion-matrix" class="result-box"></div>
+    </div>
+</section>
+
+
+<section class="card">
+    <h2>AI Risk Assessment</h2>
+    <p>
+        Review dataset quality issues and model performance
+        risks with recommendations for further investigation.
+    </p>
+
+    <button type="button" id="risk-button">
+        Assess AI Risks
+    </button>
+
+    <p id="risk-status" role="status" aria-live="polite"></p>
+
+    <div id="risk-results" hidden>
+        <h3>Risk Summary</h3>
+
+        <div class="summary-grid">
+            <div class="stat">
+                <span>Total Risks Found</span>
+                <strong id="risk-count">0</strong>
+            </div>
+        </div>
+
+        <h3>Identified Risks</h3>
+        <div id="risk-list"></div>
+
+        <p id="risk-note"></p>
+    </div>
+</section>
+
+
+<section class="card">
+    <h2>AI Governance Report</h2>
+    <p>
+        Generate a consolidated report containing your latest
+        dataset analysis, model evaluation, and risk assessment.
+    </p>
+
+    <button type="button" id="generate-report-button">
+        Generate Governance Report
+    </button>
+    <button type="button" id="download-pdf-button">
+        Download PDF Report
+    </button>
+    
+<h3>Custom Model Card Details</h3>
+
+<div class="model-card-form">
+    <label for="model-name">Model Name</label>
+    <input
+        type="text"
+        id="model-name"
+        placeholder="e.g. Customer Churn Predictor"
+    >
+    
+<label for="model-purpose">Model Purpose</label>
+<textarea
+    id="model-purpose"
+    placeholder="What is this model designed to do?"
+    rows="2"
+></textarea>
+
+
+    <label for="model-version">Model Version</label>
+    <input
+        type="text"
+        id="model-version"
+        placeholder="e.g. 1.0"
+    >
+
+    <label for="model-intended-use">Intended Use</label>
+    <textarea
+        id="model-intended-use"
+        rows="3"
+        placeholder="What is this model designed to do?"
+    ></textarea>
+
+    <label for="model-type">Model Type</label>
+    <input
+        type="text"
+        id="model-type"
+        placeholder="e.g. Classification"
+    >
+
+    <label for="model-training-data">Training Data Description</label>
+    <textarea
+        id="model-training-data"
+        rows="3"
+        placeholder="Describe the data used to train the model"
+    ></textarea>
+
+    <label for="model-limitations">Known Limitations</label>
+    <textarea
+        id="model-limitations"
+        rows="3"
+        placeholder="Describe known limitations"
+    ></textarea>
+</div>
+
+    <button type="button" id="generate-model-card-button">
+        Generate Model Card
+    </button>
+    
+    <button type="button" id="download-model-card-pdf-button">
+        Download PDF Model Card
+    </button>
+
+<p id="model-card-pdf-status" role="status" aria-live="polite"></p>
+
+
+<p id="model-card-status" role="status" aria-live="polite"></p>
+
+
+    <p id="report-status" role="status" aria-live="polite"></p>
+</section>
+
+
+        <section id="results" class="card" hidden>
+            <h2>Analysis Results</h2>
+            <p id="filename"></p>
+            
+            <button type="button" id="download-report">
+                Download JSON Report
+            </button>
+
+            <div class="summary-grid">
+                <div class="stat">
+                    <span>Total Rows</span>
+                    <strong id="rows">0</strong>
+                </div>
+
+                <div class="stat">
+                    <span>Total Columns</span>
+                    <strong id="columns">0</strong>
+                </div>
+
+                <div class="stat">
+                    <span>Duplicate Rows</span>
+                    <strong id="duplicates">0</strong>
+                </div>
+            </div>
+
+            <h3>Column Names</h3>
+            <div id="column-names" class="result-box"></div>
+
+            <h3>Data Types</h3>
+            <div id="data-types" class="result-box"></div>
+
+            <h3>Missing Values</h3>
+            <div id="missing-values" class="result-box"></div>
+
+            
+            <h3>Missing-Value Percentages</h3>
+            <div id="missing-percentages" class="result-box"></div>
+
+            <h3>Data-Quality Warnings</h3>
+            <div id="warnings" class="result-box"></div>
+
+        </section>
+    </main>
+
+    <footer>
+        AI Governance Documentation Platform | Project Prototype
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
