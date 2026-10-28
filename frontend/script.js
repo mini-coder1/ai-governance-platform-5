@@ -236,7 +236,7 @@ riskButton.addEventListener("click", async function () {
 
     try {
         const response = await fetch(
-            API_URL_BASE + "/check-risks",
+            API_BASE_URL + "/check-risks",
             {
                 method: "POST",
                 headers: {
