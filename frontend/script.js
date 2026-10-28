@@ -1,4 +1,4 @@
-
+const API_BASE_URL = "https://ai-governance-platform-5.onrender.com";
 const form = document.getElementById("upload-form");
 const fileInput = document.getElementById("csv-file");
 const button = document.getElementById("analyze-button");
@@ -35,7 +35,7 @@ form.addEventListener("submit", async function (event) {
 
     try {
         const response = await fetch(
-            "http://127.0.0.1:8000/analyze-dataset",
+            API_BASE_URL + "/analyze-dataset",
             {
                 method: "POST",
                 body: formData
@@ -146,7 +146,7 @@ evaluationForm.addEventListener("submit", async function (event) {
 
     try {
         const response = await fetch(
-            "http://127.0.0.1:8000/evaluate-model",
+            API_BASE_URL + "/evaluate-model",
             {
                 method: "POST",
                 body: formData
@@ -236,7 +236,7 @@ riskButton.addEventListener("click", async function () {
 
     try {
         const response = await fetch(
-            "http://127.0.0.1:8000/check-risks",
+            API_URL_BASE + "/check-risks",
             {
                 method: "POST",
                 headers: {
@@ -321,7 +321,7 @@ generateReportButton.addEventListener("click", async function () {
         let riskReport = null;
 
         const riskResponse = await fetch(
-            "http://127.0.0.1:8000/check-risks",
+            API_BASE_URL + "/check-risks",
             {
                 method: "POST",
                 headers: {
@@ -345,7 +345,7 @@ generateReportButton.addEventListener("click", async function () {
         riskReport = riskData;
 
         const reportResponse = await fetch(
-            "http://127.0.0.1:8000/generate-report",
+            API_BASE_URL + "/generate-report",
             {
                 method: "POST",
                 headers: {
@@ -416,7 +416,7 @@ if (pdfDownloadButton) {
             pdfDownloadButton.disabled = true;
 
             const riskResponse = await fetch(
-                "http://127.0.0.1:8000/check-risks",
+                API_BASE_URL + "/check-risks",
                 {
                     method: "POST",
                     headers: {
@@ -436,7 +436,7 @@ if (pdfDownloadButton) {
             const riskReport = await riskResponse.json();
 
             const pdfResponse = await fetch(
-                "http://127.0.0.1:8000/generate-pdf-report",
+                API_BASE_URL + "/generate-pdf-report",
                 {
                     method: "POST",
                     headers: {
@@ -511,7 +511,7 @@ if (modelCardButton) {
             status.textContent = "Generating model card...";
 
             const riskResponse = await fetch(
-                "http://127.0.0.1:8000/check-risks",
+                API_BASE_URL + "/check-risks",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -529,7 +529,7 @@ if (modelCardButton) {
             const riskReport = await riskResponse.json();
 
             const response = await fetch(
-                "http://127.0.0.1:8000/generate-model-card",
+                API_BASE_URL + "/generate-model-card",
                 {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -596,7 +596,7 @@ if (modelCardPdfButton) {
             status.textContent = "Generating PDF Model Card...";
 
             const riskResponse = await fetch(
-                "http://127.0.0.1:8000/check-risks",
+                API_BASE_URL + "/check-risks",
                 {
                     method: "POST",
                     headers: {
@@ -616,7 +616,7 @@ if (modelCardPdfButton) {
             const riskReport = await riskResponse.json();
 
             const response = await fetch(
-                "http://127.0.0.1:8000/generate-model-card-pdf",
+                API_BASE_URL + "/generate-model-card-pdf",
                 {
                     method: "POST",
                     headers: {
